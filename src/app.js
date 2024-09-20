@@ -13,7 +13,8 @@ app.use(compression())
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-
+// DB Connection
+require('./db/mongodb.init');
 
 //init routing
 app.get('/', (req, res, next) => {
