@@ -7,7 +7,7 @@ const COLLECTION_NAME = 'Users';
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema({
-    user_id: {type: String, required: true},
+    user_public_id: {type: String, default: ''},
     user_status: {type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'INACTIVE'},
     user_email: {type: String, required: true},
     user_password: {type: String, required: true},
