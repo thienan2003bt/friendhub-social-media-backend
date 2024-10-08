@@ -7,15 +7,21 @@ const COLLECTION_NAME = 'Users';
 
 // Declare the Schema of the Mongo model
 const userSchema = new mongoose.Schema({
-    user_public_id: {type: String, default: ''},
-    user_status: {type: String, enum: ['ACTIVE', 'INACTIVE'], default: 'INACTIVE'},
+    user_slug: {type: String, default: ''},
     user_email: {type: String, required: true},
     user_password: {type: String, required: true},
+    user_status: {type: String, enum: ['ACTIVE', 'INACTIVE', 'BLOCKED', 'VERIFIED', 'GOVERNMENT'], default: 'INACTIVE'},
     user_fullname: {type: String, default: '', trim: true, maxLength: 150},
-    user_avatar: {type: String, default: 'https://res.cloudinary.com/thienan-shopdev/image/upload/v1725609622/samples/logo.png'},
     user_address: {type: String, default: ''},
     user_phone: {type: String, default: ''},
-    user_country: {type: String, default: 'VN'}
+    user_country: {type: String, default: 'VN'},
+    user_avatar: {type: String, default: ''},
+    user_friends: [{type: mongoose.Types.ObjectId, ref: 'User'}],
+    user_profileId: {type: mongoose.Types.ObjectId, ref: 'Profile'},
+    user_favorite_tags: [{
+        score: {type: Number, default: 0},
+        tagId: {type: mongoose.Types.ObjectId, ref: "Tag"}
+    }]
 }, {
     timestamps: true,
     collection: COLLECTION_NAME,
