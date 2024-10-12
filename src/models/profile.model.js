@@ -6,7 +6,10 @@ const profileSchema = new mongoose.Schema({
     profile_slug: {type: String, required: true},
     profile_avatars: [{type: String, default: ''}],
     profile_cover_photos: [{type: String, default: ''}],
-    profile_photos: [{type: String, default: ''}],
+    profile_photos: [{
+        url: {type: String, default: ''},
+        slug: {type: String, default: ''},
+    }],
     profile_bio: {type: String, default: ''},
 }, {
     timestamps: true,
