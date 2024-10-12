@@ -2,9 +2,11 @@ const mongoose = require('mongoose'); // Erase if already required
 
 // Declare the Schema of the Mongo model
 const profileSchema = new mongoose.Schema({
+    profile_owner: {type: mongoose.Types.ObjectId, ref: "User", required: true},
     profile_slug: {type: String, required: true},
     profile_avatars: [{type: String, default: ''}],
     profile_cover_photos: [{type: String, default: ''}],
+    profile_photos: [{type: String, default: ''}],
     profile_bio: {type: String, default: ''},
 }, {
     timestamps: true,
@@ -29,7 +31,12 @@ const overviewProfileSchema = new mongoose.Schema({
     o_profile_schools: [{type: String, default: ''}],
     o_profile_cities: [{type: String, default: ''}],
     o_profile_hometowns: [{type: String, default: ''}],
-    o_profile_marital_status: {type: String, default: 'Single', enum: ['Single', 'Married', 'In relationship', 'Engaged', 'Divorced', 'Complicated']},
+    o_profile_marital_status:{ 
+        status: {type: String, default: 'Single', enum: ['Single', 'Married', 'In relationship', 'Engaged', 'Divorced', 'Complicated']},
+        partner: {type: String, default: ''},
+        partnerSlug: {type:String, default: ""},
+        sinceYear: {type: Date, default: new Date()},
+    },
     o_profile_phone: {type: String, default: ''},
 }, {
     timestamps: true,
