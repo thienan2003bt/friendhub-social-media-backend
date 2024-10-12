@@ -29,6 +29,13 @@ const contactProfileSchema = new mongoose.Schema({
     timestamps: true,
     collection: 'ContactProfiles',
 });
+const friendProfileSchema = new mongoose.Schema({
+    f_profile_user_id: {type: mongoose.Types.ObjectId, ref: "User", required: true},
+    f_profile_since: {type: Date, default: new Date()},
+}, {
+    timestamps: true,
+    collection: 'FriendProfiles',
+});
 const overviewProfileSchema = new mongoose.Schema({
     o_profile_workplaces: [{type: String, default: ''}],
     o_profile_schools: [{type: String, default: ''}],
@@ -92,6 +99,7 @@ module.exports = {
     ProfileModel: mongoose.model('Profile', profileSchema),
 
     ContactProfileModel: mongoose.model('ContactProfile', contactProfileSchema),
+    FriendProfileModel: mongoose.model('FriendProfile', friendProfileSchema),
     OverviewProfileModel: mongoose.model('OverviewProfile', overviewProfileSchema),
     WorkProfileModel: mongoose.model('WorkProfile', workProfileSchema),
     PlaceProfileModel: mongoose.model('PlaceProfile', placeProfileSchema),
