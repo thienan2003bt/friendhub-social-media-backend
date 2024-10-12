@@ -86,7 +86,12 @@ const aboutProfileSchema = new mongoose.Schema({
     collection: 'AboutProfiles',
 });
 const eventProfileSchema = new mongoose.Schema({
-    e_profile_events: [{type: String, default: ''}],
+    e_profile_title: {type: String, required: true},
+    e_profile_type: {type: String, default: "", enum: ['Work', 'Education', 'Relationship', 'Home', 'Family', 'Travel', 'Interest', 'Health', 'Achievement']},
+    e_profile_icon_url: {type: String, default: ''},
+    e_profile_post_url: {type: String, default: ''},
+    e_profile_since: {type: Date, default: new Date()},
+    e_profile_photo_url: {type: String, default: ''},
 }, {
     timestamps: true,
     collection: 'EventProfiles',
