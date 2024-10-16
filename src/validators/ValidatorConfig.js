@@ -5,10 +5,10 @@ class ValidatorConfig {
         this.model = model;
     }
 
-    static generateReturningValue(result, errorMessage) {
+    static generateReturningValue(isPassed, errorMessage) {
         return {
-            result: result,
-            message: (result === true) ? '' : errorMessage,
+            result: isPassed,
+            message: (isPassed === true) ? '' : errorMessage,
         };
     }
 }

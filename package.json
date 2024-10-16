@@ -1,7 +1,7 @@
 {
-  "name": "bookshop-ecommerce-nodejs-backend",
+  "name": "friendhub-social-media-nodejs-backend",
   "version": "1.0.0",
-  "description": "an effective nodejs backend for bookshop ecommerce application",
+  "description": "an effective nodejs backend for friendhub social-media application",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "nodejs",
-    "bookshop"
+    "friendhub"
   ],
   "author": "thienan2003bt",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.6.3",
     "morgan": "^1.10.0"
   },
