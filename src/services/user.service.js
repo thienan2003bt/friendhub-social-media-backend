@@ -39,7 +39,7 @@ class UserService {
 
         return await userModel.create({
             ...UserDataMapper.mapBackObject(newUser),
-            user_public_id: crypto.randomUUID(),
+            user_slug: crypto.randomUUID(),
             user_password: hashedPassword,
         });
 

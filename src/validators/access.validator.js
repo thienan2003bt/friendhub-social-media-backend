@@ -11,6 +11,13 @@ class AccessValidator extends ValidatorConfig {
         }
         return { result: true };
     }
+
+    static validateSignup(email, fullname, password) {
+        if(!email || !fullname || !password) {
+            return this.generateReturningValue(false, 'Email, fullname, and password are required');
+        }
+        return { result: true };
+    }
 }
 
 module.exports = AccessValidator;

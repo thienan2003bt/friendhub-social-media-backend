@@ -5,5 +5,7 @@ const asyncHandler = require('../helpers/asyncHandler.helper');
 
 
 router.post("/login", asyncHandler(AccessController.login))
+router.post("/logout", asyncHandler(AccessController.logout))
+router.post("/signup", asyncHandler(AccessController.signup))
 
 module.exports = router;
