@@ -21,6 +21,8 @@ app.get('/', (req, res, next) => {
     return res.send("Hello world!");
 })
 
+const CORS = require('cors');
+app.use(CORS())
 app.use('/api/v1', require('./routes/index'));
 
 

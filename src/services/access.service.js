@@ -9,13 +9,14 @@ const UserUtility = require('../utils/user.util');
 class AccessService {
     async handleLogin(email, password) {
         const foundUser = await UserModel.findOne({user_email: email}).lean();
-        if(!foundUser) {
-            throw new NotFoundError("User not found!");
+        if (!foundUser) {
+            // Now showing "User not found", because then attackers can know if the user exists or not, which is a security risk
+            throw new BadRequestError("Username or Password is incorrect!");
         }
 
         const isPasswordMatched = BcryptHelper.compare(password, foundUser?.user_password);
         if(isPasswordMatched === false) {
-            throw new BadRequestError("Password is incorrect!");
+            throw new BadRequestError("Username or Password is incorrect!");
         }
 
         const mappedUser = { ...UserDataMapper.mapObject(foundUser), password: undefined};
@@ -62,12 +63,10 @@ class AccessService {
             throw new BadRequestError("Failed to create user, please try again!");
         }
 
-        console.log("New user: ");
         const result = {
             ...UserDataMapper.mapObject(newUser._doc),
             password: undefined
         }
-        console.log(result);
         return result;
     }
 }
