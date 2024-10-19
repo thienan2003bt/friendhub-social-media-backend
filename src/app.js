@@ -4,12 +4,16 @@ const app = express();
 const morgan = require('morgan');
 const { default: helmet } = require('helmet');
 const compression = require('compression');
+const CookieParser = require('cookie-parser');
+
 require('dotenv').config();
 
 // app using packages and middlewares
 app.use(morgan("dev"))
 app.use(helmet())
 app.use(compression())
+
+app.use(CookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -22,7 +26,7 @@ app.get('/', (req, res, next) => {
 })
 
 const CORS = require('cors');
-app.use(CORS())
+app.use(CORS({ origin: true, credentials: true }));
 app.use('/api/v1', require('./routes/index'));
 
 

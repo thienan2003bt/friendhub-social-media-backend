@@ -14,6 +14,12 @@ class AccessController {
         }
 
         const data = await AccessService.handleLogin(email, password);
+        res.cookie('accessToken', data?.accessToken, {
+            httpOnly: true,
+            sameSite: 'None', // None allows cross-origin cookies
+            secure: true,     // Make sure you are using HTTPS
+            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days, JWT_EXPIRE_IN
+        });
         return new OKSuccessResponse({
             message: "Login success!",
             metadata: data
@@ -42,6 +48,15 @@ class AccessController {
         }
 
         const data = await AccessService.handleSignup(email, fullname, password);
+
+        console.log("Access token: ", data?.accessToken);
+        res.cookie('accessToken', data?.accessToken, {
+            httpOnly: true,
+            sameSite: 'None', // None allows cross-origin cookies
+            secure: true,     // Make sure you are using HTTPS
+            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) // 3 days, JWT_EXPIRE_IN
+        });
+
         return new CreatedSuccessResponse({
             message: "Signup success!",
             metadata: data
