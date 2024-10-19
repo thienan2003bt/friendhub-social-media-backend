@@ -4,12 +4,16 @@ const app = express();
 const morgan = require('morgan');
 const { default: helmet } = require('helmet');
 const compression = require('compression');
+const CookieParser = require('cookie-parser');
+
 require('dotenv').config();
 
 // app using packages and middlewares
 app.use(morgan("dev"))
 app.use(helmet())
 app.use(compression())
+
+app.use(CookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -21,6 +25,8 @@ app.get('/', (req, res, next) => {
     return res.send("Hello world!");
 })
 
+const CORS = require('cors');
+app.use(CORS({ origin: true, credentials: true }));
 app.use('/api/v1', require('./routes/index'));
 
 
@@ -36,8 +42,8 @@ app.use((error, req, res, next) => {
     return res.status(statusCode).json({
         status: 'error',
         code: statusCode,
+        message: error.message ?? 'Internal Server Error',
         errorStack: error?.stack, //Dev mode only
-        message: error.message ?? 'Internal Server Error'
     })
 })
 

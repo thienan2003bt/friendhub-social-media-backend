@@ -3,6 +3,7 @@ const userModel = require('../models/user.model');
 const {BadRequestError, NotFoundError} = require('../core/error.response');
 const BcryptHelper = require('../helpers/bcrypt.helper');
 const UserUtility = require('../utils/user.util');
+const { UserDataMapper } = require('../utils/dataMapper.util');
 
 class UserService {
     findAllUsers = async (page = 1, limit = 50, scope = 'brief') => {
@@ -14,8 +15,9 @@ class UserService {
     }
 
     findUserById = async (user_id, scope = 'detail') => {
+        const userId = UserUtility.convertToMongooseObjectIdType(user_id);
         const select = UserUtility.filterUserAttributes(scope);
-        const foundUser = await userModel.findById(user_id).select(select);
+        const foundUser = await userModel.findById(userId).select(select);
         if(!foundUser) {
             throw new NotFoundError('User not found!');
         }
@@ -36,8 +38,8 @@ class UserService {
         const select = UserUtility.filterUserAttributes(scope);
 
         return await userModel.create({
-            ...UserUtility.normalizeUser(newUser),
-            user_public_id: crypto.randomUUID(),
+            ...UserDataMapper.mapBackObject(newUser),
+            user_slug: crypto.randomUUID(),
             user_password: hashedPassword,
         });
 

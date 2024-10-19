@@ -8,7 +8,7 @@ class UserUtility {
 
     static normalizeUser(userData) {
         return {
-            user_public_id: userData?.public_id,
+            user_slug: userData?.public_id,
             user_email: userData?.email,
             user_password: userData?.password,
             user_fullname: userData?.fullname,
@@ -21,7 +21,7 @@ class UserUtility {
 
     static destabilizeUser(userData) {
         return {
-            public_id: userData?.user_public_id,
+            public_id: userData?.user_slug,
             email: userData?.user_email,
             password: userData?.user_password,
             fullname: userData?.user_fullname,
@@ -35,7 +35,7 @@ class UserUtility {
     static filterUserAttributes(scope = 'detail') {
         switch (scope) {
             case 'brief': 
-                const select = ['user_public_id', 'user_email', 'user_fullname', 'user_avatar'];
+                const select = ['user_slug', 'user_email', 'user_fullname', 'user_avatar'];
                 return Object.fromEntries(select.map((ele) => {
                     return [ele, 1]
                 }))
