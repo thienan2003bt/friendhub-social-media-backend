@@ -4,7 +4,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8081;
 
 const server = app.listen(PORT, () => {
-    console.log("Bookshop NodeJS Server is listening on port " + PORT + ", url: http://localhost:" + PORT);
+    console.log("FriendHub NodeJS Core Server is listening on port " + PORT + ", url: http://localhost:" + PORT);
 })
 
 process.on('SIGINT', () => {
